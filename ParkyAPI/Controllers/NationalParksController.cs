@@ -69,13 +69,33 @@ namespace ParkyAPI.Controllers
             //    return BadRequest(ModelState);
             //}
             //kalo error lain2
-            var npOBj = _mapper.Map<NationalPark>(nationalParkDTO);
-            if (!_npRepo.CreateNationalPark(npOBj))
+            var npObj = _mapper.Map<NationalPark>(nationalParkDTO);
+            if (!_npRepo.CreateNationalPark(npObj))
             {
-                ModelState.AddModelError("", $"ada kesalahan saat menyimpan {npOBj.Name}");
+                ModelState.AddModelError("", $"ada kesalahan saat menyimpan {npObj.Name}");
                 return StatusCode(500, ModelState);
             }
-            return CreatedAtRoute("GetNationalPark", new { nationalParkId=npOBj.Id }, npOBj);
+            return CreatedAtRoute("GetNationalPark", new { nationalParkId=npObj.Id }, npObj);
+        }
+
+        [HttpPatch("{nationalParkId:int}", Name = "UpdateNationalPark")]
+        public IActionResult UpdateNationalPark(int nationalParkId, [FromBody] NationalParkDTO nationalParkDTO)
+        {
+            if (nationalParkDTO == null || nationalParkId != nationalParkDTO.Id)
+            {
+                return BadRequest(ModelState);
+            }
+           
+            //konvert model ke DTO
+            var npObj = _mapper.Map<NationalPark>(nationalParkDTO);
+            //error lain2
+            if (!_npRepo.UpdateNationalPark(npObj))
+            {
+                ModelState.AddModelError("", $"ada kesalahan saat menyimpan {npObj.Name}");
+                return StatusCode(500, ModelState);
+            }
+
+            return NoContent();
         }
     }
 }
