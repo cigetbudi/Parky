@@ -41,7 +41,19 @@ namespace ParkyAPI
                     new Microsoft.OpenApi.Models.OpenApiInfo()
                     {
                         Title = "Parky API",
-                        Version = "1"
+                        Version = "1",
+                        Description = "Belajar Parky API",
+                        Contact= new Microsoft.OpenApi.Models.OpenApiContact()
+                        {
+                            Email = "cigetbudi@gmail.com",
+                            Name = "Sigit Budi Darmawan",
+                            Url = new Uri("https://www.linkedin.com/in/cigetbudi")
+                        },
+                        License = new Microsoft.OpenApi.Models.OpenApiLicense()
+                        {
+                            Name = "MIT License",
+                            Url = new Uri("https://en.wikipedia.org/wiki/MIT_License")
+                        }
                     });
                 var xmlCommentFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var cmlCommentsFullPatch = Path.Combine(AppContext.BaseDirectory, xmlCommentFile);
