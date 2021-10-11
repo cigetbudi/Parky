@@ -61,6 +61,15 @@ namespace ParkyAPI.Controllers
                 return NotFound();
             }
             var objDTO = _mapper.Map<NationalParkDTO>(obj);
+            ////tanpa automapper
+            //var objDTO = new NationalParkDTO()
+            //{
+            //    Created = obj.Created,
+            //    Id = obj.Id,
+            //    Name = obj.Name,
+            //    State = obj.State
+            //};
+
             return Ok(objDTO);
         }
 
