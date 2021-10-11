@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ParkyAPI.Models;
 using ParkyAPI.Models.DTOs;
 using ParkyAPI.Repository.IRepository;
 using System;
@@ -46,6 +47,35 @@ namespace ParkyAPI.Controllers
             }
             var objDTO = _mapper.Map<NationalParkDTO>(obj);
             return Ok(objDTO);
+        }
+
+        [HttpPost]
+        public IActionResult CreateNationalPark([FromBody] NationalParkDTO nationalParkDTO)
+        {
+            //kalo kosong
+            if (nationalParkDTO == null)
+            {
+                return BadRequest(ModelState);
+            }
+            //kalo duplikat
+            if (_npRepo.NationalParkExists(nationalParkDTO.Name))
+            {
+                ModelState.AddModelError("","Nama sudah ada");
+                return StatusCode(404, ModelState);
+            }
+            //kalo ada row yang ga sesuai
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            //kalo error lain2
+            var npOBj = _mapper.Map<NationalPark>(nationalParkDTO);
+            if (!_npRepo.CreateNationalPark(npOBj))
+            {
+                ModelState.AddModelError("", $"ada kesalahan saat menyimpan {npOBj.Name}");
+                return StatusCode(500, ModelState);
+            }
+            return Ok();
         }
     }
 }
