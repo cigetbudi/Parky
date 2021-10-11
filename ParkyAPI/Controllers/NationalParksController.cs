@@ -24,6 +24,11 @@ namespace ParkyAPI.Controllers
             _mapper = mapper;
         }
 
+
+        /// <summary>
+        /// Ambil semua list National Parks
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult GetNationalParks()
         {
@@ -37,6 +42,11 @@ namespace ParkyAPI.Controllers
             return Ok(objDTO);
         }
 
+        /// <summary>
+        /// Ambil 1 National Park by ID
+        /// </summary>
+        /// <param name="nationalParkId"> ID nya</param>
+        /// <returns></returns>
         [HttpGet("{nationalParkId:int}",Name = "GetNationalPark")]
         public IActionResult GetNationalPark(int nationalParkId)
         {
@@ -49,6 +59,11 @@ namespace ParkyAPI.Controllers
             return Ok(objDTO);
         }
 
+        /// <summary>
+        /// Create national park
+        /// </summary>
+        /// <param name="nationalParkDTO"></param>
+        /// <returns></returns>
         [HttpPost]
         public IActionResult CreateNationalPark([FromBody] NationalParkDTO nationalParkDTO)
         {
@@ -78,6 +93,12 @@ namespace ParkyAPI.Controllers
             return CreatedAtRoute("GetNationalPark", new { nationalParkId=npObj.Id }, npObj);
         }
 
+        /// <summary>
+        /// Update antional park
+        /// </summary>
+        /// <param name="nationalParkId"> ID nya</param>
+        /// <param name="nationalParkDTO"></param>
+        /// <returns></returns>
         [HttpPatch("{nationalParkId:int}", Name = "UpdateNationalPark")]
         public IActionResult UpdateNationalPark(int nationalParkId, [FromBody] NationalParkDTO nationalParkDTO)
         {
@@ -98,6 +119,11 @@ namespace ParkyAPI.Controllers
             return NoContent();
         }
 
+        /// <summary>
+        /// Hapus National Park by ID
+        /// </summary>
+        /// <param name="nationalParkId"> ID nya</param>
+        /// <returns></returns>
         [HttpDelete("{nationalParkId:int}", Name = "DeleteNationalPark")]
         public IActionResult DeleteNationalPark(int nationalParkId)
         {

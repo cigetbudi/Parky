@@ -13,7 +13,9 @@ using ParkyAPI.Repository;
 using ParkyAPI.Repository.IRepository;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace ParkyAPI
@@ -41,6 +43,9 @@ namespace ParkyAPI
                         Title = "Parky API",
                         Version = "1"
                     });
+                var xmlCommentFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var cmlCommentsFullPatch = Path.Combine(AppContext.BaseDirectory, xmlCommentFile);
+                options.IncludeXmlComments(cmlCommentsFullPatch);
             });
             services.AddControllers();
         }
