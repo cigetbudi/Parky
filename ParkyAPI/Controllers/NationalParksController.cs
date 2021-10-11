@@ -37,7 +37,7 @@ namespace ParkyAPI.Controllers
             return Ok(objDTO);
         }
 
-        [HttpGet("{nationalParkId:int}")]
+        [HttpGet("{nationalParkId:int}",Name = "GetNationalPark")]
         public IActionResult GetNationalPark(int nationalParkId)
         {
             var obj = _npRepo.GetNationalPark(nationalParkId);
@@ -63,11 +63,11 @@ namespace ParkyAPI.Controllers
                 ModelState.AddModelError("","Nama sudah ada");
                 return StatusCode(404, ModelState);
             }
-            //kalo ada row yang ga sesuai
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            ////kalo ada row yang ga sesuai
+            //if (!ModelState.IsValid)
+            //{
+            //    return BadRequest(ModelState);
+            //}
             //kalo error lain2
             var npOBj = _mapper.Map<NationalPark>(nationalParkDTO);
             if (!_npRepo.CreateNationalPark(npOBj))
@@ -75,7 +75,7 @@ namespace ParkyAPI.Controllers
                 ModelState.AddModelError("", $"ada kesalahan saat menyimpan {npOBj.Name}");
                 return StatusCode(500, ModelState);
             }
-            return Ok();
+            return CreatedAtRoute("GetNationalPark", new { nationalParkId=npOBj.Id }, npOBj);
         }
     }
 }
