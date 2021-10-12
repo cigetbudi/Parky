@@ -13,6 +13,7 @@ namespace ParkyAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public class TrailsController : ControllerBase
     {
         private ITrailRepository _tRepo;
@@ -41,7 +42,7 @@ namespace ParkyAPI.Controllers
         }
 
         [HttpGet("{trailId:int}", Name ="GetTrail")]
-        [ProducesResponseType(200, Type = typeof(NationalParkDTO))]
+        [ProducesResponseType(200, Type = typeof(TrailDTO))]
         [ProducesResponseType(404)]
         [ProducesDefaultResponseType]
         public IActionResult GetTrail(int trailId)
@@ -69,7 +70,7 @@ namespace ParkyAPI.Controllers
         /// <param name="trailDTO"></param>
         /// <returns></returns>
         [HttpPost]
-        [ProducesResponseType(201, Type = typeof(NationalParkDTO))]
+        [ProducesResponseType(201, Type = typeof(TrailDTO))]
         [ProducesResponseType(404)]
         [ProducesResponseType(500)]
         public IActionResult CreateTrail([FromBody] TrailCreateDTO trailDTO)
@@ -114,7 +115,7 @@ namespace ParkyAPI.Controllers
 
             //konversi model ke DTO
             var tObj = _mapper.Map<Trail>(trailDTO);
-            if (!_tRepo.CreateTrail(tObj))
+            if (!_tRepo.UpdateTrail(tObj))
             {
                 ModelState.AddModelError("", $"ada kesalahan saat merubah {tObj.Name}");
                 return StatusCode(500, ModelState);

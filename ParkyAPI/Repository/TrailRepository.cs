@@ -45,13 +45,13 @@ namespace ParkyAPI.Repository
 
         public bool Save()
         {
-            
+
             return _db.SaveChanges() >= 0 ? true : false;
         }
 
         public bool TrailExists(string name)
         {
-            bool value = _db.Trails.Any(o => o.Name.ToLower().Trim() == name.ToLower());
+            bool value = _db.Trails.Any(o => o.Name.ToLower().Trim() == name.ToLower().Trim());
             return value;
         }
 
