@@ -7,7 +7,7 @@ using static ParkyAPI.Models.Trail;
 
 namespace ParkyAPI.Models.DTOs
 {
-    public class TrialDTO
+    public class TrailDTO
     {
         public int Id { get; set; }
         [Required]

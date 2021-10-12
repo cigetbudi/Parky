@@ -111,7 +111,7 @@ namespace ParkyAPI.Controllers
         }
 
         /// <summary>
-        /// Update antional park
+        /// Update National park
         /// </summary>
         /// <param name="nationalParkId"> ID nya</param>
         /// <param name="nationalParkDTO"></param>
