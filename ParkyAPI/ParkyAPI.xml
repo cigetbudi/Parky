@@ -45,14 +45,14 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:ParkyAPI.Controllers.TrailsController.CreateTrail(ParkyAPI.Models.DTOs.TrailUpsertDTO)">
+        <member name="M:ParkyAPI.Controllers.TrailsController.CreateTrail(ParkyAPI.Models.DTOs.TrailCreateDTO)">
             <summary>
             Create National Park
             </summary>
             <param name="trailDTO"></param>
             <returns></returns>
         </member>
-        <member name="M:ParkyAPI.Controllers.TrailsController.UpdateTrail(System.Int32,ParkyAPI.Models.DTOs.TrailUpsertDTO)">
+        <member name="M:ParkyAPI.Controllers.TrailsController.UpdateTrail(System.Int32,ParkyAPI.Models.DTOs.TrailUpdateDTO)">
             <summary>
             Update Trail
             </summary>

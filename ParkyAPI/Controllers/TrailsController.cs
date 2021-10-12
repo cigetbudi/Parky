@@ -72,7 +72,7 @@ namespace ParkyAPI.Controllers
         [ProducesResponseType(201, Type = typeof(NationalParkDTO))]
         [ProducesResponseType(404)]
         [ProducesResponseType(500)]
-        public IActionResult CreateTrail([FromBody] TrailUpsertDTO trailDTO)
+        public IActionResult CreateTrail([FromBody] TrailCreateDTO trailDTO)
         {
             //kosong
             if (trailDTO == null)
@@ -105,7 +105,7 @@ namespace ParkyAPI.Controllers
         [ProducesResponseType(204)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult UpdateTrail (int trailId, [FromBody] TrailUpsertDTO trailDTO)
+        public IActionResult UpdateTrail (int trailId, [FromBody] TrailUpdateDTO trailDTO)
         {
             if (trailDTO==null || trailId != trailDTO.Id)
             {
