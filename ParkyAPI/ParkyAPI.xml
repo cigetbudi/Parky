@@ -26,7 +26,7 @@
         </member>
         <member name="M:ParkyAPI.Controllers.NationalParksController.UpdateNationalPark(System.Int32,ParkyAPI.Models.DTOs.NationalParkDTO)">
             <summary>
-            Update antional park
+            Update National park
             </summary>
             <param name="nationalParkId"> ID nya</param>
             <param name="nationalParkDTO"></param>
@@ -37,6 +37,34 @@
             Hapus National Park by ID
             </summary>
             <param name="nationalParkId"> ID nya</param>
+            <returns></returns>
+        </member>
+        <member name="M:ParkyAPI.Controllers.TrailsController.GetTrails">
+            <summary>
+            Ambil semua list Trail
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ParkyAPI.Controllers.TrailsController.CreateTrail(ParkyAPI.Models.DTOs.TrailUpsertDTO)">
+            <summary>
+            Create National Park
+            </summary>
+            <param name="trailDTO"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ParkyAPI.Controllers.TrailsController.UpdateTrail(System.Int32,ParkyAPI.Models.DTOs.TrailUpsertDTO)">
+            <summary>
+            Update Trail
+            </summary>
+            <param name="trailId"></param>
+            <param name="trailDTO"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ParkyAPI.Controllers.TrailsController.DeleteTrail(System.Int32)">
+            <summary>
+            Hapus Trail
+            </summary>
+            <param name="trailId"> IDnya</param>
             <returns></returns>
         </member>
     </members>
