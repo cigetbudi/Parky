@@ -22,7 +22,7 @@ namespace ParkyAPI
                 options.SwaggerDoc(
                     desc.GroupName, new Microsoft.OpenApi.Models.OpenApiInfo()
                     {
-                        Title = $"Parki API { desc.ApiVersion}",
+                        Title = $"Parki API {desc.ApiVersion}",
                         Version = desc.ApiVersion.ToString()
                     }); 
             }

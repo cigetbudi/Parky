@@ -47,8 +47,8 @@ namespace ParkyAPI
                     options.ReportApiVersions = true;
                 });
             services.AddVersionedApiExplorer(options => options.GroupNameFormat = "'v'VVV");
-            services.AddSwaggerGen();
             services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
+            services.AddSwaggerGen();
 
             //services.AddSwaggerGen(options =>
             //{
@@ -111,10 +111,19 @@ namespace ParkyAPI
             app.UseSwagger();
             app.UseSwaggerUI(options =>
             {
-                options.SwaggerEndpoint("/swagger/ParkyOpenAPISpec/swagger.json", "Parky API");
-                //options.SwaggerEndpoint("/swagger/ParkyOpenAPISpecTrails/swagger.json", "Parky API Trails");
+                foreach (var desc in provider.ApiVersionDescriptions)
+                     options.SwaggerEndpoint($"/swagger/{desc.GroupName}/swagger.json",
+                        desc.GroupName.ToUpperInvariant());
+
                 options.RoutePrefix = "";
+
             });
+            //app.UseSwaggerUI(options =>
+            //{
+            //    options.SwaggerEndpoint("/swagger/ParkyOpenAPISpec/swagger.json", "Parky API");
+            //    //options.SwaggerEndpoint("/swagger/ParkyOpenAPISpecTrails/swagger.json", "Parky API Trails");
+            //    options.RoutePrefix = "";
+            //});
             app.UseRouting();
 
             app.UseAuthorization();
