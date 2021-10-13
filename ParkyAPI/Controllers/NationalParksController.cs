@@ -109,7 +109,7 @@ namespace ParkyAPI.Controllers
                 ModelState.AddModelError("", $"ada kesalahan saat menyimpan {npObj.Name}");
                 return StatusCode(500, ModelState);
             }
-            return CreatedAtRoute("GetNationalPark", new { nationalParkId=npObj.Id }, npObj);
+            return CreatedAtRoute("GetNationalPark", new {version=HttpContext.GetRequestedApiVersion().ToString(), nationalParkId=npObj.Id }, npObj);
         }
 
         /// <summary>
