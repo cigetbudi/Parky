@@ -11,7 +11,7 @@ namespace ParkyWeb.Repository.IRepository
         Task<IEnumerable<T>> GetAllAsync(string url);
         Task<bool> CreateAsync(string url, T objToCreate);
         Task<bool> UpdateAsync(string url, T objToUpdate);
-        Task<bool> DeleteASync(string url, T objToDelete);
+        Task<bool> DeleteAsync(string url, int id);
 
     }
 }

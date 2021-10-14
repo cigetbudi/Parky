@@ -43,24 +43,76 @@ namespace ParkyWeb.Repository
             }
         }
 
-        public Task<bool> DeleteASync(string url, T objToDelete)
+        public async Task<bool> DeleteAsync(string url, int id)
         {
-            throw new NotImplementedException();
+            var request = new HttpRequestMessage(HttpMethod.Delete, url+id);
+
+            var client = _clientFactory.CreateClient();
+            HttpResponseMessage response = await client.SendAsync(request);
+            if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
-        public Task<IEnumerable<T>> GetAllAsync(string url)
+        public async Task<IEnumerable<T>> GetAllAsync(string url)
         {
-            throw new NotImplementedException();
+            var request = new HttpRequestMessage(HttpMethod.Get, url);
+
+            var client = _clientFactory.CreateClient();
+            HttpResponseMessage response = await client.SendAsync(request);
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                var jsonString = await response.Content.ReadAsStringAsync();
+                //convert ke IEnumerable
+                return JsonConvert.DeserializeObject<IEnumerable<T>>(jsonString);
+            }
+            return null;
         }
 
-        public Task<T> GetAsync(string url, int id)
+        public async Task<T> GetAsync(string url, int id)
         {
-            throw new NotImplementedException();
+            var request = new HttpRequestMessage(HttpMethod.Get, url);
+
+            var client = _clientFactory.CreateClient();
+            HttpResponseMessage response = await client.SendAsync(request);
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                var jsonString = await response.Content.ReadAsStringAsync();
+                //convert ke IEnumerable
+                return JsonConvert.DeserializeObject<T>(jsonString);
+            }
+            return null;
         }
 
-        public Task<bool> UpdateAsync(string url, T objToUpdate)
+        public async Task<bool> UpdateAsync(string url, T objToUpdate)
         {
-            throw new NotImplementedException();
+            var request = new HttpRequestMessage(HttpMethod.Patch, url);
+            if (objToUpdate != null)
+            {
+                request.Content = new StringContent(
+                    JsonConvert.SerializeObject(objToUpdate), Encoding.UTF8, "application/json");
+            }
+
+            else
+            {
+                return false;
+            }
+            var client = _clientFactory.CreateClient();
+            HttpResponseMessage response = await client.SendAsync(request);
+            //201
+            if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }
