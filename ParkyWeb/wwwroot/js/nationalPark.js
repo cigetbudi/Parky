@@ -30,3 +30,30 @@ function loadDataTable() {
         ]
     });
 }
+
+function Delete(url) {
+    swal({
+        title: "Yakin untuk hapus?",
+        text: "data tidak bisa dikembalikan lagi",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    }).then((willDelete) => {
+        if (willDelete) {
+            $.ajax({
+                type: 'DELETE',
+                url: url,
+                success: function (data) {
+                    if (data.success) {
+                        toastr.success(data.message);
+                        dataTable.ajax.reload();
+                    }
+                    else {
+                        toastr.error(data.message);
+                    }
+                }
+            });
+        }
+
+    });
+}
