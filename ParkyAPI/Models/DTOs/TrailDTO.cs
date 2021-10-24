@@ -18,5 +18,7 @@ namespace ParkyAPI.Models.DTOs
         [Required]
         public int NationalParkId { get; set; }
         public NationalParkDTO NationalPark { get; set; }
+        [Required]
+        public double Elevation { get; set; }
     }
 }
